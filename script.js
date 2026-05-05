@@ -21,7 +21,7 @@ const places = [
 {name:"Fisheries Science Department",x:43.25,y:53.89, img: "images/FISH.jpg"},
 {name:"Audio Visual Center (AVC)",x:41.92,y:53.33, img: "images/AUDIO.jpg"},
 {name:"Admin Building",x:41.3,y:57.4, img: "images/"},
-{name:"College of Education (CoED)",x:37.17,y:57.4, img: "images/COES.jpg"},
+{name:"College of Education (CoED)",x:37.17,y:57.4, img: "images/COED.jpg"},
 {name:"College of Arts and Sciences (CAS)",x:33.19,y:57.4, img: "images/CAS.jpg"},
 {name:"Biosystems Building",x:29.5,y:58.33, img: "images/BIOSYSTEM.jpg"},
 {name:"Ladies' Dormitory",x:30.4,y:46.22, img: "images/LADIES.jpg"},
@@ -3473,9 +3473,13 @@ const routes = {
     marker.style.top=p.y+"%";
 
     // TOOLTIP
-    let tooltip=document.createElement("div");
-    tooltip.className="tooltip";
-    tooltip.innerText=p.name;
+    let tooltip = document.createElement("div");
+tooltip.className = "tooltip";
+
+tooltip.innerHTML = `
+  <img src="${p.img}" class="tooltip-img">
+  <div>${p.name}</div>
+`;
 
     tooltip.style.left=p.x+"%";
     tooltip.style.top=p.y+"%";
