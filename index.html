@@ -42,14 +42,25 @@ To: <select id="to"></select>
 </div>
 
 <div class="modal" id="modal">
-<div class="modal-content">
-<h3 id="title"></h3>
-<p id="desc"></p>
-<br>
-<button onclick="closeModal()">Close</button>
-</div>
+
+  <div class="modal-content">
+
+    <div class="modal-header">
+      <h3 id="title"></h3>
+      <button class="close-btn" onclick="closeModal()">✕</button>
+    </div>
+
+    <img id="modalImg" class="modal-img">
+
+    <div class="modal-body">
+      <p id="desc"></p>
+    </div>
+
+  </div>
+
 </div>
 
+</div>
 <script src="script.js"></script>
 
 </body>

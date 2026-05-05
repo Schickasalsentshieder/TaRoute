@@ -1,13 +1,13 @@
 const places = [
-{name:"Admissions and Registration",x:44,y:82},
-{name:"Graduate Studies",x:42.1,y:83},
-{name:"CHEFS Building",x:47.25,y:78.33},
-{name:"University Food Center (UFC)",x:44.05,y:74.5},
-{name:"Bren Z. Guiao Multi-purpose Center",x:48.45,y:72.3},
-{name:"PSAU Library",x:44.1,y:68.86},
-{name:"Extension Library",x:44.1,y:66},
+{name:"Admissions and Registration",x:44,y:82, img: "images/REGISTAR.jpg"},
+{name:"Graduate Studies",x:42.1,y:83, img: "images/.jpg"},
+{name:"CHEFS Building",x:47.25,y:78.33, img: "images/CHEFS.jpg"},
+{name:"University Food Center (UFC)",x:44.05,y:74.5, img: "images/UFC.jpg"},
+{name:"Bren Z. Guiao Multi-purpose Center",x:48.45,y:72.3, img: "images/MULTI2.jpg"},
+{name:"PSAU Library",x:44.1,y:68.86, img: "images/LIB.jpg"},
+{name:"Extension Library",x:44.1,y:66, img: "images/ELIB.jpg"},
 {name:"Office of Student Affairs and Services (OSAS) and PSAU TVET Center",x:43.2,y:64},
-{name:"Alumni Office",x:47.60,y:63.32},
+{name:"Alumni Office",x:47.60,y:63.32, img: "images/"},
 {name:"Information Communication Technology RDE Facility",x:54.5,y:62.9},
 {name:"College of Business, Economics and Entrepreneurship (CBEE)",x:56.5,y:62},
 {name:"College of Agriculture Systems and Technology (CASTech)",x:59.83,y:60.9},
@@ -3456,147 +3456,151 @@ const routes = {
 ],
 };
 
-const map=document.getElementById("map");
-const list=document.getElementById("list");
-const fromSelect=document.getElementById("from");
-const toSelect=document.getElementById("to");
-const routeLayer=document.getElementById("routeLayer");
-const sidebar=document.getElementById("sidebar");
+    const map=document.getElementById("map");
+    const list=document.getElementById("list");
+    const fromSelect=document.getElementById("from");
+    const toSelect=document.getElementById("to");
+    const routeLayer=document.getElementById("routeLayer");
+    const sidebar=document.getElementById("sidebar");
 
-/* LOAD */
-places.forEach(p=>{
+    /* LOAD */
+    places.forEach(p=>{
 
-// DOT MARKER
-let marker=document.createElement("div");
-marker.className="area";
-marker.style.left=p.x+"%";
-marker.style.top=p.y+"%";
+    // DOT MARKER
+    let marker=document.createElement("div");
+    marker.className="area";
+    marker.style.left=p.x+"%";
+    marker.style.top=p.y+"%";
 
-// TOOLTIP
-let tooltip=document.createElement("div");
-tooltip.className="tooltip";
-tooltip.innerText=p.name;
+    // TOOLTIP
+    let tooltip=document.createElement("div");
+    tooltip.className="tooltip";
+    tooltip.innerText=p.name;
 
-tooltip.style.left=p.x+"%";
-tooltip.style.top=p.y+"%";
+    tooltip.style.left=p.x+"%";
+    tooltip.style.top=p.y+"%";
 
-// HOVER EVENTS
-marker.addEventListener("mouseenter",()=>{
-tooltip.style.opacity=1;
-});
-
-marker.addEventListener("mouseleave",()=>{
-tooltip.style.opacity=0;
-});
-
-// CLICK (optional, keep mo)
-marker.onclick=()=>{
-    document.querySelectorAll(".area").forEach(m=>{
-        m.style.display = "none"; // hide ALL circles
+    // HOVER EVENTS
+    marker.addEventListener("mouseenter",()=>{
+    tooltip.style.opacity=1;
     });
-    openModal(p);
-};
 
-// APPEND
-map.appendChild(marker);
-map.appendChild(tooltip);
-
-// SIDEBAR LIST (unchanged)
-let item=document.createElement("a");
-item.innerText=p.name;
-item.onclick=()=>{
-    document.querySelectorAll(".area").forEach(m=>{
-        m.style.display = "none"; // hide ALL circles
+    marker.addEventListener("mouseleave",()=>{
+    tooltip.style.opacity=0;
     });
-    openModal(p);
-};
-list.appendChild(item);
 
-// DROPDOWN (unchanged)
-fromSelect.add(new Option(p.name,p.name));
-toSelect.add(new Option(p.name,p.name));
+    // CLICK (optional, keep mo)
+    marker.onclick=()=>{
+        document.querySelectorAll(".area").forEach(m=>{
+            m.style.display = "none"; // hide ALL circles
+        });
+        openModal(p);
+    };
 
-});
+    // APPEND
+    map.appendChild(marker);
+    map.appendChild(tooltip);
 
-/* MODAL */
-function openModal(p){
-title.innerText=p.name;
-desc.innerText="Campus location";
-modal.style.display="flex";
+    // SIDEBAR LIST (unchanged)
+    let item=document.createElement("a");
+    item.innerText=p.name;
+    item.onclick=()=>{
+        document.querySelectorAll(".area").forEach(m=>{
+            m.style.display = "none"; // hide ALL circles
+        });
+        openModal(p);
+    };
+    list.appendChild(item);
+
+    // DROPDOWN (unchanged)
+    fromSelect.add(new Option(p.name,p.name));
+    toSelect.add(new Option(p.name,p.name));
+
+    });
+
+    /* MODAL */
+    function openModal(p){
+  title.innerText = p.name;
+  desc.innerText = "Campus location";
+
+  const img = document.getElementById("modalImg");
+  img.src = p.img;
+
+  modal.style.display = "flex";
 }
-function closeModal(){modal.style.display="none";}
+    function closeModal(){modal.style.display="none";}
 
-/* NAVIGATION */
-function navigate(){
+    /* NAVIGATION */
+    function navigate(){
 
-const from=fromSelect.value;
-const to=toSelect.value;
+    const from=fromSelect.value;
+    const to=toSelect.value;
 
-drawRoute(from,to);
+    drawRoute(from,to);
 
-directions.innerHTML=`Route: ${from} → ${to}`;
-}
+    directions.innerHTML=`Route: ${from} → ${to}`;
+    }
 
 
-/* DRAW ROUTE */
-function drawRoute(from,to){
+    /* DRAW ROUTE */
+    function drawRoute(from,to){
 
-routeLayer.innerHTML="";
+    routeLayer.innerHTML="";
 
-let key=from+"|"+to;
-let reverse=to+"|"+from;
-let path=routes[key];
+    let key=from+"|"+to;
+    let reverse=to+"|"+from;
+    let path=routes[key];
 
-if(!path && routes[reverse]){
-path=[...routes[reverse]].reverse();
-}
+    if(!path && routes[reverse]){
+    path=[...routes[reverse]].reverse();
+    }
 
-if(!path){
-let p1=places.find(p=>p.name===from);
-let p2=places.find(p=>p.name===to);
-path=[p1,p2];
-}
+    if(!path){
+    let p1=places.find(p=>p.name===from);
+    let p2=places.find(p=>p.name===to);
+    path=[p1,p2];
+    }
 
-let w=map.clientWidth;
-let h=map.clientHeight;
+    let w=map.clientWidth;
+    let h=map.clientHeight;
 
-let points=path.map(p=>`${(p.x/100)*w},${(p.y/100)*h}`).join(" ");
+    let points=path.map(p=>`${(p.x/100)*w},${(p.y/100)*h}`).join(" ");
 
-let poly=document.createElementNS("http://www.w3.org/2000/svg","polyline");
-poly.setAttribute("points",points);
-poly.setAttribute("fill","none");
-poly.setAttribute("stroke","red");
-poly.setAttribute("stroke-width","8");
+    let poly=document.createElementNS("http://www.w3.org/2000/svg","polyline");
+    poly.setAttribute("points",points);
+    poly.setAttribute("fill","none");
+    poly.setAttribute("stroke","red");
+    poly.setAttribute("stroke-width","8");
 
-routeLayer.appendChild(poly);
-}
+    routeLayer.appendChild(poly);
+    }
 
-/* SEARCH */
-search.addEventListener("keyup",function(){
-let val=this.value.toLowerCase();
-let items=list.getElementsByTagName("a");
+    /* SEARCH */
+    search.addEventListener("keyup",function(){
+    let val=this.value.toLowerCase();
+    let items=list.getElementsByTagName("a");
 
-for(let i=0;i<items.length;i++){
-items[i].style.display =
-items[i].innerText.toLowerCase().includes(val) ? "block":"none";
-}
-});
+    for(let i=0;i<items.length;i++){
+    items[i].style.display =
+    items[i].innerText.toLowerCase().includes(val) ? "block":"none";
+    }
+    });
 
-/* NAV TOGGLE */
-function toggleMenu(){
-sidebar.classList.toggle("active");
-}
+    /* NAV TOGGLE */
+    function toggleMenu(){
+    sidebar.classList.toggle("active");
+    }
 
-/* BACK */
-function goBack(){
-modal.style.display="none";
-sidebar.classList.remove("active");
-}
-
-function closeModal(){
+    /* BACK */
+    function goBack(){
     modal.style.display="none";
+    sidebar.classList.remove("active");
+    }
 
-    document.querySelectorAll(".area").forEach(m=>{
-        m.style.display = "block"; // show again
-    });
-}
+    function closeModal(){
+        modal.style.display="none";
+
+        document.querySelectorAll(".area").forEach(m=>{
+            m.style.display = "block"; // show again
+        });
+    }
