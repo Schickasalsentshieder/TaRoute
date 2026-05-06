@@ -5,44 +5,43 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TaRoute PSAU</title>
 <link rel="stylesheet" href="style.css">
-
-<style>
-</style>
 </head>
 
 <body>
 
+<!-- SIDEBAR -->
 <div class="sidebar" id="sidebar">
-<button class="back-btn" onclick="goBack()">← Back</button>
-<h2>TaRoute PSAU</h2>
-<input type="text" id="search" placeholder="Search building...">
-<div id="list"></div>
+  <button class="back-btn" onclick="goBack()">← Back</button>
+  <h2>TaRoute PSAU</h2>
+  <input type="text" id="search" placeholder="Search building...">
+  <div id="list"></div>
 </div>
 
+<!-- MAIN -->
 <div class="main">
 
-<div class="header">
-<span class="menu-btn" onclick="toggleMenu()">☰</span>
-<h3>TaRoute PSAU</h3>
+  <div class="header">
+    <span class="menu-btn" onclick="toggleMenu()">☰</span>
+    <h3>TaRoute PSAU</h3>
+  </div>
+
+  <div class="nav-box">
+    From: <select id="from"></select>
+    To: <select id="to"></select>
+    <button onclick="navigate()">Go</button>
+    <div id="directions"></div>
+  </div>
+
+  <div class="map-container">
+    <div class="map" id="map">
+      <svg id="routeLayer"></svg>
+    </div>
+  </div>
+
 </div>
 
-<div class="nav-box">
-From: <select id="from"></select>
-To: <select id="to"></select>
-<button onclick="navigate()">Go</button>
-<div id="directions"></div>
-</div>
-
-<div class="map-container">
-<div class="map" id="map">
-<svg id="routeLayer"></svg>
-</div>
-</div>
-
-</div>
-
+<!-- MODAL -->
 <div class="modal" id="modal">
-
   <div class="modal-content">
 
     <div class="modal-header">
@@ -57,9 +56,6 @@ To: <select id="to"></select>
     </div>
 
   </div>
-</div>
-</div>
-
 </div>
 
 <script src="script.js"></script>
