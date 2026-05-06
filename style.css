@@ -228,8 +228,16 @@ body{
     display:none !important;
   }
 
+  .map-container{
+    padding:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+  }
+
   .map{
-    width:100%;
+    width:100vw;
     max-width:none;
     aspect-ratio:4/3;
     margin:0 auto;
